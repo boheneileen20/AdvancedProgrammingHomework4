@@ -14,6 +14,10 @@ public class TextTwist extends JPanel implements MouseListener {
     private int height;
     private Toolkit toolkit;
     private Image background;
+    private ArrayList<String> givenWord;
+    private ArrayList<String> secretWords1;
+    private ArrayList<String> secretWords2;
+    private ArrayList<String> secretWords3;
 
     /**
      * Constructor for objects of class TextTwist
@@ -24,6 +28,8 @@ public class TextTwist extends JPanel implements MouseListener {
         width = getPreferredSize().width;
         height = getPreferredSize().height;
         addMouseListener( this );
+        givenWord.add("DARKEN");
+
 
     }
 
