@@ -3,12 +3,21 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.event.*;
 
+/**
+ * TextTwist is a game requiring the user to find the words contained in a given word.
+ *
+ * @author Eileen Bohen
+ * @version Spring 2019
+ */
 public class TextTwist extends JPanel implements MouseListener {
     private int width;
     private int height;
     private Toolkit toolkit;
     private Image background;
 
+    /**
+     * Constructor for objects of class TextTwist
+     */
     public TextTwist() {
         setPreferredSize(new Dimension(500, 500));
 
@@ -32,12 +41,16 @@ public class TextTwist extends JPanel implements MouseListener {
 
     }
 
+    /**
+     * Creates the window and GUI
+     *
+     */
     public static void createAndShowGUI(){
         //Create and set up the window.
         JFrame frame = new JFrame("Text Twist");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Add the ubiquitous "Hello World" label.
+        //Add label
         TextTwist panel = new TextTwist();
         frame.getContentPane().add(panel);
 
@@ -59,6 +72,11 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
 
+    /**
+     * Main method to run program
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
