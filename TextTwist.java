@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
+import java.util.*;
 /**
  * TextTwist is a game requiring the user to find the words contained in a given word.
  *
@@ -34,6 +35,8 @@ public class TextTwist extends JPanel implements MouseListener {
     private Ellipse2D.Double circ4 = new Ellipse2D.Double(410, 220, 40, 40);
     private Ellipse2D.Double circ5 = new Ellipse2D.Double(470, 220, 40, 40);
     private Ellipse2D.Double circ6 = new Ellipse2D.Double(530, 220, 40, 40);
+    private ButtonGroup buttons = new ButtonGroup();
+    private TextTwistDriver tTD = new TextTwistDriver("kandre.txt");
 
     /**
      * Constructor for objects of class TextTwist
@@ -62,29 +65,79 @@ public class TextTwist extends JPanel implements MouseListener {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 32));
         g.drawImage(image1, 0, 0, this);
         g.setColor(Color.WHITE);
+        // Create boxes under word buttons
         ((Graphics2D)g).fill(twist);
         ((Graphics2D)g).fill(enter);
         ((Graphics2D)g).fill(lastWord);
         ((Graphics2D)g).fill(clear);
+        // Create boxes above word buttons
         g.drawRect(220, 120, 60, 60);
         g.drawRect(280, 120, 60, 60);
         g.drawRect(340, 120, 60, 60);
         g.drawRect(400, 120, 60, 60);
         g.drawRect(460, 120, 60, 60);
         g.drawRect(520, 120, 60, 60);
+        // Create word buttons
         ((Graphics2D)g).fill(circ1);
         ((Graphics2D)g).fill(circ2);
         ((Graphics2D)g).fill(circ3);
         ((Graphics2D)g).fill(circ4);
         ((Graphics2D)g).fill(circ5);
         ((Graphics2D)g).fill(circ6);
+        // Create score
         g.drawString("SCORE", 220, 370);
+        // Create time
         g.drawString("TIME", 220, 450);
         g.setColor(Color.YELLOW);
         ((Graphics2D)g).fill(twist2);
         ((Graphics2D)g).fill(enter2);
         ((Graphics2D)g).fill(lastWord2);
         ((Graphics2D)g).fill(clear2);
+        // read meta to make boxes for undiscovered words
+        String meta = tTD.getMeta();
+        Scanner s = new Scanner(meta);
+        int threeLetter = s.nextInt();
+        int fourLetter = s.nextInt();
+        int fiveLetter = s.nextInt();
+        int sixLetter = s.nextInt();
+        int startX = 5;
+        int startY = 10;
+        int space = 21;
+        final int WIDTH = 15;
+        final int MAX3 = 5;
+        final int OFFSET = 65;
+
+        for (int i = 0; i < threeLetter; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(i>=MAX3){
+                    g.drawRect(startX + (j * space) + OFFSET, startY + ((i-MAX3) * space), WIDTH, WIDTH);
+                }
+                else{
+                    g.drawRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+                }
+            }
+        }
+        if (threeLetter > MAX3) 
+            startY = startY + (MAX3*WIDTH) + (MAX3*6);
+        else 
+            startY = startY + (threeLetter*WIDTH) + (threeLetter*6);
+        for (int i = 0; i < fourLetter; i++) {
+            for (int j = 0; j < 4; j++) {
+                g.drawRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+            }
+        }
+        startY = startY + (fourLetter*WIDTH) + (fourLetter*6);
+        for (int i = 0; i < fiveLetter; i++) {
+            for (int j = 0; j < 5; j++) {
+                g.drawRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+            }
+        }
+        startY = startY + (fiveLetter*WIDTH) + (fiveLetter*6);
+        for (int i = 0; i < sixLetter; i++) {
+            for (int j = 0; j < 6; j++) {
+                g.drawRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+            }
+        }
     }
 
     /**
@@ -99,6 +152,8 @@ public class TextTwist extends JPanel implements MouseListener {
         //Add label
         TextTwist panel = new TextTwist();
         frame.getContentPane().add(panel);
+        //ButtonPanel button = new ButtonPanel(panel);
+        //frame.getContentPane().add(button);
 
         //Display the window.
         frame.pack();

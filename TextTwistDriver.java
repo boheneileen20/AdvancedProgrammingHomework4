@@ -12,6 +12,7 @@ public class TextTwistDriver
     public ArrayList<String> words;
     private int size1;
     public boolean[] sols;
+    public static String meta;
 
     /**
      * Constructor for objects of class TextTwistDriver
@@ -23,6 +24,7 @@ public class TextTwistDriver
             letters = new String[6];
             words = new ArrayList<String>();
             Scanner s = new Scanner(new File(fileName));
+            meta = s.nextLine();
 
             //Read in letters
             for (int i = 0; i < 6; i++) {
@@ -70,9 +72,14 @@ public class TextTwistDriver
             System.out.print(words.get(i) + " ");   
         }
     }
+    
+    public static String getMeta() {
+        return meta;
+    }
 
     public static void main (String args[]) {
         TextTwistDriver test = new TextTwistDriver("usatel.txt");
+        System.out.println(getMeta());
         Scanner s = new Scanner(System.in);
         do {
             test.checkInput((String)s.next());
