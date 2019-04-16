@@ -20,23 +20,25 @@ public class TextTwist extends JPanel implements MouseListener {
     private ArrayList<String> secretWords2;
     private ArrayList<String> secretWords3;
     private Image image1;
-    private Rectangle twist = new Rectangle(240, 300, 60, 30);
-    private Rectangle twist2 = new Rectangle(242, 302, 56, 26);
+    private Rectangle twist = new Rectangle(220, 280, 70, 50);
+    private Rectangle twist2 = new Rectangle(222, 282, 66, 46);
     private boolean twistHighlight = false;
-    private Rectangle enter = new Rectangle(310, 300, 60, 30);
-    private Rectangle enter2 = new Rectangle(312, 302, 56, 26);
-    private Rectangle lastWord = new Rectangle(380, 300, 60, 30);
-    private Rectangle lastWord2 = new Rectangle(382, 302, 56, 26);
-    private Rectangle clear = new Rectangle(450, 300, 60, 30);
-    private Rectangle clear2 = new Rectangle(452, 302, 56, 26);
+    private Rectangle enter = new Rectangle(300, 280, 70, 50);
+    private Rectangle enter2 = new Rectangle(302, 282, 66, 46);
+    private Rectangle lastWord = new Rectangle(380, 280, 70, 50);
+    private Rectangle lastWord2 = new Rectangle(382, 282, 66, 46);
+    private Rectangle clear = new Rectangle(460, 280, 70, 50);
+    private Rectangle clear2 = new Rectangle(462, 282, 66, 46);
+    private Rectangle enterText = new Rectangle(220, 120, 360, 60);
     private Ellipse2D.Double circ1 = new Ellipse2D.Double(230, 220, 40, 40);
     private Ellipse2D.Double circ2 = new Ellipse2D.Double(290, 220, 40, 40);
     private Ellipse2D.Double circ3 = new Ellipse2D.Double(350, 220, 40, 40);
     private Ellipse2D.Double circ4 = new Ellipse2D.Double(410, 220, 40, 40);
     private Ellipse2D.Double circ5 = new Ellipse2D.Double(470, 220, 40, 40);
     private Ellipse2D.Double circ6 = new Ellipse2D.Double(530, 220, 40, 40);
-    private ButtonGroup buttons = new ButtonGroup();
     private TextTwistDriver tTD = new TextTwistDriver("kandre.txt");
+    private String text = "";
+    private boolean rand = false;
 
     /**
      * Constructor for objects of class TextTwist
@@ -62,8 +64,9 @@ public class TextTwist extends JPanel implements MouseListener {
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 32));
+        String letters = tTD.letters.toString();
         g.drawImage(image1, 0, 0, this);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 32));
         g.setColor(Color.WHITE);
         // Create boxes under word buttons
         ((Graphics2D)g).fill(twist);
@@ -94,6 +97,14 @@ public class TextTwist extends JPanel implements MouseListener {
         ((Graphics2D)g).fill(lastWord2);
         ((Graphics2D)g).fill(clear2);
         // read meta to make boxes for undiscovered words
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
+        g.drawString("TWIST", 226, 310);
+        g.drawString("ENTER", 306, 310);
+        g.drawString("LAST", 388, 300);
+        g.drawString("WORD", 388, 315);
+        g.drawString("CLEAR", 462, 310);
+        g.setColor(Color.YELLOW);
         String meta = tTD.getMeta();
         Scanner s = new Scanner(meta);
         int threeLetter = s.nextInt();
@@ -110,7 +121,7 @@ public class TextTwist extends JPanel implements MouseListener {
         for (int i = 0; i < threeLetter; i++) {
             for (int j = 0; j < 3; j++) {
                 if(i>=MAX3){
-                    g.drawRect(startX + (j * space) + OFFSET, startY + ((i-MAX3) * space), WIDTH, WIDTH);
+                    g.drawRect(startX + (j * space) + OFFSET + 10, startY + ((i-MAX3) * space), WIDTH, WIDTH);
                 }
                 else{
                     g.drawRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
@@ -138,6 +149,23 @@ public class TextTwist extends JPanel implements MouseListener {
                 g.drawRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
             }
         }
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+        if (rand) {
+            letters = tTD.randomize();
+        }
+        g.setColor(Color.BLACK);
+        g.drawString(letters.substring(0, 1).toUpperCase(), 242, 247);
+        g.drawString(letters.substring(1, 2).toUpperCase(), 302, 247);
+        g.drawString(letters.substring(2, 3).toUpperCase(), 362, 247);
+        g.drawString(letters.substring(3, 4).toUpperCase(), 422, 247);
+        g.drawString(letters.substring(4, 5).toUpperCase(), 482, 247);
+        g.drawString(letters.substring(5).toUpperCase(), 542, 247);
+        rand = false;
+    }
+
+    public void randomizeLetters() {
+        rand = true;
+        repaint();
     }
 
     /**
@@ -152,24 +180,13 @@ public class TextTwist extends JPanel implements MouseListener {
         //Add label
         TextTwist panel = new TextTwist();
         frame.getContentPane().add(panel);
-        //ButtonPanel button = new ButtonPanel(panel);
-        //frame.getContentPane().add(button);
 
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
 
-    public void mouseEntered( MouseEvent e ) { 
-        int x = e.getX();
-        int y = e.getY();
-        if (twist.contains(x,y)) {
-            twistHighlight = true;
-            repaint();
-        }
-        else 
-            twistHighlight = false;
-    }
+    public void mouseEntered( MouseEvent e ) { }
 
     public void mouseExited( MouseEvent e ) { }
 
@@ -181,6 +198,15 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     public void mouseClicked( MouseEvent e ) {
+        if (enterText.contains(e.getPoint())) {
+            JOptionPane jPane = new JOptionPane(text);
+            text = jPane.showInputDialog("Enter text");
+            if (tTD.checkInput(text)) {
+                repaint();
+            }
+        }
+        if (twist.contains(e.getPoint()))
+            randomizeLetters();
     }
 
     /**
