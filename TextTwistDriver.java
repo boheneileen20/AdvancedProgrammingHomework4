@@ -162,6 +162,14 @@ public class TextTwistDriver
             System.out.print(words.get(i) + " ");   
         }
     }
+   
+    public String returnLetters() {
+        String lett = "";
+        for (int i = 0; i < 6; i++) {
+            lett+= letters[i];
+        }
+        return lett;
+    }
 
     public static String getMeta() {
         return meta;
@@ -181,4 +189,3 @@ public class TextTwistDriver
         System.out.println("You are a winner!");
     }
 }
-
