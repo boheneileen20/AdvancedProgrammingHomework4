@@ -87,6 +87,7 @@ public class TextTwistDriver
     public boolean checkInput(String input) {
         for (int i = 0; i < size1; i++) {
             if (input.equals(words.get(i))) {
+                sols[i] = true;
                 return true;   
             }
         }
