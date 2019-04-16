@@ -39,7 +39,8 @@ public class TextTwist extends JPanel implements MouseListener {
     private TextTwistDriver tTD = new TextTwistDriver("reggor.txt");
     private String text = "";
     private boolean rand = false;
-
+    private boolean won = false;
+    
     /**
      * Constructor for objects of class TextTwist
      */
@@ -126,7 +127,7 @@ public class TextTwist extends JPanel implements MouseListener {
                     if (tTD.sols[count]) {
                         g.setColor(Color.BLACK);
                     }
-                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + OFFSET + 12, startY + ((i-MAX3) * space) + 13);
+                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + OFFSET + 12, startY + ((i-MAX3) * space) + 11);
                     g.setColor(Color.YELLOW);
                 }
                 else{
@@ -134,7 +135,7 @@ public class TextTwist extends JPanel implements MouseListener {
                     if (tTD.sols[count]) {
                         g.setColor(Color.BLACK);
                     }
-                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 13);
+                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
                     g.setColor(Color.YELLOW);
                 }
             }
@@ -150,7 +151,7 @@ public class TextTwist extends JPanel implements MouseListener {
                 if (tTD.sols[count]) {
                     g.setColor(Color.BLACK);
                 }
-                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 13);
+                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
                 g.setColor(Color.YELLOW);
             }
             count++;
@@ -162,7 +163,7 @@ public class TextTwist extends JPanel implements MouseListener {
                 if (tTD.sols[count]) {
                     g.setColor(Color.BLACK);
                 }
-                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 13);
+                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
                 g.setColor(Color.YELLOW);
             }
             count++;
@@ -174,7 +175,7 @@ public class TextTwist extends JPanel implements MouseListener {
                 if (tTD.sols[count]) {
                     g.setColor(Color.BLACK);
                 }
-                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 13);
+                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
                 g.setColor(Color.YELLOW);
             }
             count++;
@@ -191,11 +192,18 @@ public class TextTwist extends JPanel implements MouseListener {
         g.drawString(letters.substring(4, 5).toUpperCase(), 482, 247);
         g.drawString(letters.substring(5).toUpperCase(), 542, 247);
         rand = false;
+        
+        if (won) 
+            win();
 
         if (tTD.winner()) {
+            won = true;
             repaint();
-            JOptionPane.showMessageDialog(null, "YOU WIN");
         }
+    }
+    
+    public void win() {
+        JOptionPane.showMessageDialog(null, "YOU WIN");
     }
 
     public void randomizeLetters() {
