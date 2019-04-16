@@ -14,15 +14,12 @@ public class TextTwistDriver
     public ArrayList<String> words;
     private int size1;
     public boolean[] sols;
-<<<<<<< HEAD
     public static String meta;
-=======
     private int three;
     private int four;
     private int five;
     private int six;
     private int total; //temporary variable to keep track of words to be removed in final implementation
->>>>>>> 43756b3a7a0f22ef23b04385cf69a48b2bc57e30
 
     /**
      * Constructor for objects of class TextTwistDriver
@@ -111,7 +108,6 @@ public class TextTwistDriver
     
     public int getTotal() { return total;}
 
-<<<<<<< HEAD
     public void printLetters() {
         for (int i = 0; i < 6; i++) {
             System.out.print(letters[i] + " "); 
@@ -129,9 +125,7 @@ public class TextTwistDriver
         return meta;
     }
 
-=======
     // Main method used for general testing
->>>>>>> 43756b3a7a0f22ef23b04385cf69a48b2bc57e30
     public static void main (String args[]) {
         TextTwistDriver test = new TextTwistDriver("usatel.txt");
         System.out.println(getMeta());
