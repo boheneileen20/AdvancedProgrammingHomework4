@@ -37,6 +37,8 @@ public class TextTwistDriver
             letters = new String[6];
             words = new ArrayList<String>();
             Scanner s = new Scanner(new File(fileName));
+
+            //Read in meta-data
             meta = s.nextLine();
 
             //Read in letters
@@ -62,7 +64,7 @@ public class TextTwistDriver
             System.err.println("File not found");
         }
     }
-    
+
     /**
      * Method which checks to see if every word has been found
      * 
@@ -75,10 +77,10 @@ public class TextTwistDriver
         return true;
     }
 
-    
     /**
      * Method which checks to see if input string matches
      * with any words in the words array
+     * 
      * @param input String to be compared to words in words array
      * @return boolean if input is contained in words array
      */
@@ -90,8 +92,48 @@ public class TextTwistDriver
         }
         return false;
     }
-    
-    
+
+    /**
+     * Method which randomizes the six given letters
+     * and returns them in a random order in a string
+     * 
+     * @return random String that has the six letters in 
+     *  a different order than the initial
+     */
+    public String randomize() {
+        String random = "";
+        boolean[] used = new boolean[6];
+        Random rand = new Random();
+        while (checkFalse(used)){ 
+            int next = rand.nextInt(6);
+            if (used[next] == false){ 
+                random += letters[next];
+                used[next] = true;
+            }
+        }
+
+        return random;
+    }
+
+    /**
+     * Helper method which checks to see any array indexes
+     * in the given boolean array are false, returning true if
+     * a false value is found and true in all other cases
+     * 
+     * @param test boolean array to be checked for false values
+     * @return falseFound boolean indicating if test contains any falses
+     */
+    public boolean checkFalse(boolean[] test) {
+        boolean falseFound = false;
+        for (int i = 0; i < test.length; i++) {
+            if (test[i] == false) {
+                falseFound = true;
+                break;
+            }
+        }
+        return falseFound;
+    }
+
     /**
      * Getter methods which return their respective variables
      * which represent the number of words of that numbers length
@@ -99,13 +141,13 @@ public class TextTwistDriver
      * @return number of words of num length
      */
     public int getThree() {return three;}
-    
+
     public int getFour() {return four;}
-    
+
     public int getFive() {return five;}
-    
+
     public int getSix() {return six;}
-    
+
     public int getTotal() { return total;}
 
     public void printLetters() {
@@ -120,7 +162,7 @@ public class TextTwistDriver
             System.out.print(words.get(i) + " ");   
         }
     }
-    
+
     public static String getMeta() {
         return meta;
     }
