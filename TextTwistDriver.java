@@ -164,6 +164,10 @@ public class TextTwistDriver
         }
     }
    
+    /**
+     * prints the letters the user can choose from.
+     * 
+     */
     public String returnLetters() {
         String lett = "";
         for (int i = 0; i < 6; i++) {
@@ -171,7 +175,9 @@ public class TextTwistDriver
         }
         return lett;
     }
-
+/**
+ * This returnst the meta data.
+ */
     public static String getMeta() {
         return meta;
     }
