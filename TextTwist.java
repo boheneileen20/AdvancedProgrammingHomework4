@@ -46,12 +46,15 @@ public class TextTwist extends JPanel implements MouseListener {
      * Constructor for objects of class TextTwist
      */
     public TextTwist() {
+        //sets size of window
         setPreferredSize(new Dimension(600, 500));
         toolkit = Toolkit.getDefaultToolkit();
+        //sets graphics of window
         image1 = toolkit.getImage("BG.jpg");
         setBackground(Color.WHITE);
         width = getPreferredSize().width;
         height = getPreferredSize().height;
+        //adds functionality of mouse
         addMouseListener( this );
         //givenWord.add("DARKEN");
 
@@ -122,6 +125,7 @@ public class TextTwist extends JPanel implements MouseListener {
         final int OFFSET = 65;
         int count = 0;
         g.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        //produces boxes for 3 letter words
         for (int i = 0; i < threeLetter; i++) {
             for (int j = 0; j < 3; j++) {
                 if(i>=MAX3){
@@ -147,6 +151,7 @@ public class TextTwist extends JPanel implements MouseListener {
             startY = startY + (MAX3*WIDTH) + (MAX3*6);
         else 
             startY = startY + (threeLetter*WIDTH) + (threeLetter*6);
+        //produces boxes for 4 letter words
         for (int i = 0; i < fourLetter; i++) {
             for (int j = 0; j < 4; j++) {
                 g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
@@ -159,6 +164,7 @@ public class TextTwist extends JPanel implements MouseListener {
             count++;
         }
         startY = startY + (fourLetter*WIDTH) + (fourLetter*6);
+        //produces boxes for 5 letter words
         for (int i = 0; i < fiveLetter; i++) {
             for (int j = 0; j < 5; j++) {
                 g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
@@ -171,6 +177,7 @@ public class TextTwist extends JPanel implements MouseListener {
             count++;
         }
         startY = startY + (fiveLetter*WIDTH) + (fiveLetter*6);
+        //produces boxes for 6 letter words
         for (int i = 0; i < sixLetter; i++) {
             for (int j = 0; j < 6; j++) {
                 g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
@@ -195,6 +202,7 @@ public class TextTwist extends JPanel implements MouseListener {
         g.drawString(letters.substring(5).toUpperCase(), 542, 247);
         rand = false;
 
+        //if won makes popup to notify winning
         if (won) 
             win();
 
@@ -204,10 +212,18 @@ public class TextTwist extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * This makes a dialog box appear stating the player has won.
+     * 
+     */
     public void win() {
         JOptionPane.showMessageDialog(null, "YOU WIN");
     }
 
+    /**
+     * This randomizes the letters that the user can choose from.
+     * 
+     */
     public void randomizeLetters() {
         rand = true;
         repaint();
@@ -231,17 +247,53 @@ public class TextTwist extends JPanel implements MouseListener {
         frame.setVisible(true);
     }
 
+    /**
+     * This method makes sure the mouse does nothing when the mouse enters the panel.
+     * 
+     * @param e   the event the mouse triggers
+     * 
+     */
     public void mouseEntered( MouseEvent e ) { }
 
+    /**
+     * This method makes sure the mouse does nothing when the mouse exits the panel.
+     * 
+     * @param e   the event the mouse triggers
+     * 
+     */
     public void mouseExited( MouseEvent e ) { }
 
+    /**
+     * This method makes sure the mouse does nothing when the mouse is pressed down.
+     * 
+     * @param e   the event the mouse triggers
+     * 
+     */
     public void mousePressed( MouseEvent e ) { }
 
+    /**
+     * This method makes sure the mouse does nothing when the mouse button is released.
+     * 
+     * @param e   the event the mouse triggers
+     * 
+     */
     public void mouseReleased( MouseEvent e ) { }
 
-    public void mouseWheelMoved( MouseWheelEvent e ){
-    }
+    /**
+     * This method makes sure the mouse does nothing when the mouse is moved.
+     * 
+     * @param e   the event the mouse triggers
+     * 
+     */
+    public void mouseWheelMoved( MouseWheelEvent e ){ }
 
+    /**
+     * When the mouse clicks the button above the letters, the user can enter the word in a dialog box.
+     * Then the score is updated if the word entered is correct.
+     * 
+     * @param e   the event the mouse triggers
+     * 
+     */
     public void mouseClicked( MouseEvent e ) {
         if (enter.contains(e.getPoint()) || enterText.contains(e.getPoint())) {
             JOptionPane jPane = new JOptionPane(text);
