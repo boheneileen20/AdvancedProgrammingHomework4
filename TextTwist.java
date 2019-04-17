@@ -42,6 +42,8 @@ public class TextTwist extends JPanel implements MouseListener {
     private boolean rand = false;
     private boolean won = false;
     private String score = "0";
+    private boolean clearText = false;
+    private boolean showPreviousWord = false;
 
     /**
      * Constructor for objects of class TextTwist
@@ -202,8 +204,44 @@ public class TextTwist extends JPanel implements MouseListener {
         g.drawString(letters.substring(4, 5).toUpperCase(), 482, 247);
         g.drawString(letters.substring(5).toUpperCase(), 542, 247);
         rand = false;
-       
-        
+
+        //draw text to screen (user guess)
+        if(!clearText && !showPreviousWord){
+            ArrayList<String> textLetters = new ArrayList<>();
+            for(int i = 0; i<text.length(); i++){
+                textLetters.add(text.substring(i,i+1));
+            }
+            textLetters.add(text.substring(text.length()));
+            int textStartx = 230;
+            int textStarty = 175;
+            int textSpace = 60;
+
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+            for(int i = 0; i<textLetters.size(); i++){
+                g.drawString(textLetters.get(i).toUpperCase(), textStartx + textSpace*i, textStarty);
+            }
+        }
+
+        clearText = false;
+
+        //if the user has selected last word, write the previous word to the scree
+        if(showPreviousWord){
+            ArrayList<String> previousLetters = new ArrayList<>();
+            for(int i = 0; i<previousWord.length(); i++){
+                previousLetters.add(previousWord.substring(i,i+1));
+            }
+            previousLetters.add(previousWord.substring(previousWord.length()));
+            int textStartx = 230;
+            int textStarty = 175;
+            int textSpace = 60;
+
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+            for(int i = 0; i<previousLetters.size(); i++){
+                g.drawString(previousLetters.get(i).toUpperCase(), textStartx + textSpace*i, textStarty);
+            }
+        }
+
+        showPreviousWord = false;
 
         //if won make popup to notify winning
         if (won) 
@@ -229,6 +267,24 @@ public class TextTwist extends JPanel implements MouseListener {
      */
     public void randomizeLetters() {
         rand = true;
+        repaint();
+    }
+
+    /**
+     * Clears the users guess from the screen
+     * 
+     */
+    public void clearLetters() {
+        clearText = true;
+        repaint();
+    }
+
+    /**
+     * Clears the users guess from the screen
+     * 
+     */
+    public void showPrevious() {
+        showPreviousWord = true;
         repaint();
     }
 
@@ -314,8 +370,15 @@ public class TextTwist extends JPanel implements MouseListener {
                 repaint();
             }
         }
-        if (twist.contains(e.getPoint()))
+        if (twist.contains(e.getPoint())){
             randomizeLetters();
+        }
+        if (clear.contains(e.getPoint())){
+            clearLetters();
+        }
+        if(lastWord.contains(e.getPoint())){
+            showPrevious();
+        }
     }
 
     /**
@@ -338,7 +401,7 @@ public class TextTwist extends JPanel implements MouseListener {
         else{
             System.out.println("To play the game, you must provide an input argument. Enter 0,1, or 2.");
         }
-        
+
         tTD = new TextTwistDriver(file);
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
