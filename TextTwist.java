@@ -38,6 +38,7 @@ public class TextTwist extends JPanel implements MouseListener {
     private Ellipse2D.Double circ6 = new Ellipse2D.Double(530, 220, 40, 40);
     private static TextTwistDriver tTD;
     private String text = "";
+    private String previousWord = "";
     private boolean rand = false;
     private boolean won = false;
     private String score = "0";
@@ -201,8 +202,10 @@ public class TextTwist extends JPanel implements MouseListener {
         g.drawString(letters.substring(4, 5).toUpperCase(), 482, 247);
         g.drawString(letters.substring(5).toUpperCase(), 542, 247);
         rand = false;
+       
+        
 
-        //if won makes popup to notify winning
+        //if won make popup to notify winning
         if (won) 
             win();
 
@@ -297,6 +300,7 @@ public class TextTwist extends JPanel implements MouseListener {
     public void mouseClicked( MouseEvent e ) {
         if (enter.contains(e.getPoint()) || enterText.contains(e.getPoint())) {
             JOptionPane jPane = new JOptionPane(text);
+            previousWord = text;
             text = jPane.showInputDialog("Enter text");
             if (tTD.checkInput(text)) {
                 if (text.length() == 3)
@@ -317,12 +321,24 @@ public class TextTwist extends JPanel implements MouseListener {
     /**
      * Main method to run program
      *
-     * @param args command line arguments
+     * @param args command line arguments. If args = "0", reggor.txt is used, if args = "1", kandre.txt is used, and if
+     * args = "2", usatel.txt is used.
      */
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter file name to mix words");
-        String file = scan.next();
+        String file = "";
+        if(args[0].equals("0")){
+            file = "reggor.txt";
+        }
+        else if(args[0].equals("1")){
+            file = "kandre.txt";
+        }
+        else if(args[0].equals("2")){
+            file = "usatel.txt";
+        }
+        else{
+            System.out.println("To play the game, you must provide an input argument. Enter 0,1, or 2.");
+        }
+        
         tTD = new TextTwistDriver(file);
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
