@@ -36,11 +36,12 @@ public class TextTwist extends JPanel implements MouseListener {
     private Ellipse2D.Double circ4 = new Ellipse2D.Double(410, 220, 40, 40);
     private Ellipse2D.Double circ5 = new Ellipse2D.Double(470, 220, 40, 40);
     private Ellipse2D.Double circ6 = new Ellipse2D.Double(530, 220, 40, 40);
-    private TextTwistDriver tTD = new TextTwistDriver("reggor.txt");
+    private static TextTwistDriver tTD;
     private String text = "";
     private boolean rand = false;
     private boolean won = false;
-    
+    private String score = "0";
+
     /**
      * Constructor for objects of class TextTwist
      */
@@ -90,6 +91,7 @@ public class TextTwist extends JPanel implements MouseListener {
         ((Graphics2D)g).fill(circ6);
         // Create score
         g.drawString("SCORE", 220, 370);
+        g.drawString(score, 220, 410);
         // Create time
         g.drawString("TIME", 220, 450);
         g.setColor(Color.YELLOW);
@@ -192,7 +194,7 @@ public class TextTwist extends JPanel implements MouseListener {
         g.drawString(letters.substring(4, 5).toUpperCase(), 482, 247);
         g.drawString(letters.substring(5).toUpperCase(), 542, 247);
         rand = false;
-        
+
         if (won) 
             win();
 
@@ -201,7 +203,7 @@ public class TextTwist extends JPanel implements MouseListener {
             repaint();
         }
     }
-    
+
     public void win() {
         JOptionPane.showMessageDialog(null, "YOU WIN");
     }
@@ -241,10 +243,18 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     public void mouseClicked( MouseEvent e ) {
-        if (enterText.contains(e.getPoint())) {
+        if (enter.contains(e.getPoint()) || enterText.contains(e.getPoint())) {
             JOptionPane jPane = new JOptionPane(text);
             text = jPane.showInputDialog("Enter text");
             if (tTD.checkInput(text)) {
+                if (text.length() == 3)
+                    score = String.valueOf(Integer.parseInt(score) + 90);
+                if (text.length() == 4)
+                    score = String.valueOf(Integer.parseInt(score) + 140);
+                if (text.length() == 5)
+                    score = String.valueOf(Integer.parseInt(score) + 250);
+                if (text.length() == 6)
+                    score = String.valueOf(Integer.parseInt(score) + 360);
                 repaint();
             }
         }
@@ -258,6 +268,10 @@ public class TextTwist extends JPanel implements MouseListener {
      * @param args command line arguments
      */
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter file name to mix words");
+        String file = scan.next();
+        tTD = new TextTwistDriver(file);
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
