@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * TextTwist is a game requiring the user to find the words contained in a given word.
  *
- * @author Eileen Bohen
+ * @author Eileen Bohen 
  * @version Spring 2019
  */
 public class TextTwist extends JPanel implements MouseListener {

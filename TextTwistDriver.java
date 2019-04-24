@@ -6,7 +6,7 @@ import java.io.*;
  * graphics are set up to keep game running. 
  *
  * @author Greg MacGown
- * @version 4/8/19
+ * @version 4/8/19 
  */
 public class TextTwistDriver
 {
