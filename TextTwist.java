@@ -276,6 +276,7 @@ public class TextTwist extends JPanel implements MouseListener {
      */
     public void clearLetters() {
         clearText = true;
+        text = "";
         repaint();
     }
 
@@ -285,6 +286,7 @@ public class TextTwist extends JPanel implements MouseListener {
      */
     public void showPrevious() {
         showPreviousWord = true;
+        text = previousWord;
         repaint();
     }
 
@@ -358,15 +360,9 @@ public class TextTwist extends JPanel implements MouseListener {
             JOptionPane jPane = new JOptionPane(text);
             previousWord = text;
             text = jPane.showInputDialog("Enter text");
-            if (tTD.checkInput(text)) {
-                if (text.length() == 3)
-                    score = String.valueOf(Integer.parseInt(score) + 90);
-                if (text.length() == 4)
-                    score = String.valueOf(Integer.parseInt(score) + 140);
-                if (text.length() == 5)
-                    score = String.valueOf(Integer.parseInt(score) + 250);
-                if (text.length() == 6)
-                    score = String.valueOf(Integer.parseInt(score) + 360);
+            int pos = tTD.words.indexOf(text);
+            if (tTD.checkInput(text) &&tTD.sols[pos]) {
+                score = String.valueOf(tTD.score);
                 repaint();
             }
         }

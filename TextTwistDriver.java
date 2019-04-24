@@ -19,6 +19,7 @@ public class TextTwistDriver
     private int four;
     private int five;
     private int six;
+    public int score;
     private int total; //temporary variable to keep track of words to be removed in final implementation
 
     /**
@@ -34,6 +35,7 @@ public class TextTwistDriver
             four = 0;
             five = 0;
             six = 0;
+            score = 0;
             letters = new String[6];
             words = new ArrayList<String>();
             Scanner s = new Scanner(new File(fileName));
@@ -86,8 +88,16 @@ public class TextTwistDriver
      */
     public boolean checkInput(String input) {
         for (int i = 0; i < size1; i++) {
-            if (input.equals(words.get(i))) {
+            if (input.equals(words.get(i)) && ! sols[i]) {
                 sols[i] = true;
+                if (input.length() == 3)
+                    score += 90;
+                if (input.length() == 4)
+                    score += 140;
+                if (input.length() == 5)
+                    score += 250;
+                if (input.length() == 6)
+                    score += 360;
                 return true;   
             }
         }
@@ -102,17 +112,21 @@ public class TextTwistDriver
      *  a different order than the initial
      */
     public String randomize() {
+        String[] lett = new String[6];
         String random = "";
         boolean[] used = new boolean[6];
         Random rand = new Random();
         while (checkFalse(used)){ 
             int next = rand.nextInt(6);
             if (used[next] == false){ 
+                lett[next] = letters[next];
                 random += letters[next];
                 used[next] = true;
             }
         }
-
+        for (int i = 0; i < 6; i++) {
+            letters[i] = lett[i];
+        }
         return random;
     }
 
@@ -148,6 +162,8 @@ public class TextTwistDriver
     public int getFive() {return five;}
 
     public int getSix() {return six;}
+    
+    public int getScore() {return score;}
 
     public int getTotal() { return total;}
 
@@ -163,7 +179,7 @@ public class TextTwistDriver
             System.out.print(words.get(i) + " ");   
         }
     }
-   
+
     /**
      * prints the letters the user can choose from.
      * 
@@ -175,9 +191,10 @@ public class TextTwistDriver
         }
         return lett;
     }
-/**
- * This returnst the meta data.
- */
+
+    /**
+     * This returnst the meta data.
+     */
     public static String getMeta() {
         return meta;
     }
