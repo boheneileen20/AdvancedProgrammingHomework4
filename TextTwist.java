@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.util.*;
 /**
- * TextTwist is a game requiring the user to find the words contained in a given word.
+ * TextTwist is a game the user to find the words contained in a word.
  *
  * @author Eileen Bohen 
  * @version Spring 2019
@@ -66,7 +66,7 @@ public class TextTwist extends JPanel implements MouseListener {
     /**
      * PaintComponent method for JPanel.
      *
-     * @param  g   the Graphics object for this applet
+     * @param g The Graphics object for this applet.
      */
     @Override
     public void paintComponent(Graphics g)
@@ -262,7 +262,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * This randomizes the letters that the user can choose from.
+     * This randomizes the letters the user can choose from.
      * 
      */
     public void randomizeLetters() {
@@ -271,7 +271,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Clears the users guess from the screen
+     * Clears the users guess from the screen.
      * 
      */
     public void clearLetters() {
@@ -281,7 +281,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Clears the users guess from the screen
+     * Clears the users guess from the screen.
      * 
      */
     public void showPrevious() {
@@ -291,7 +291,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Creates the window and GUI
+     * Creates the window and GUI.
      *
      */
     public static void createAndShowGUI(){
@@ -309,50 +309,50 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * This method makes sure the mouse does nothing when the mouse enters the panel.
+     * This makes the mouse do nothing entering the panel.
      * 
-     * @param e   the event the mouse triggers
+     * @param e The event the mouse triggers.
      * 
      */
     public void mouseEntered( MouseEvent e ) { }
 
     /**
-     * This method makes sure the mouse does nothing when the mouse exits the panel.
+     * This makes the mouse do nothing exiting the panel.
      * 
-     * @param e   the event the mouse triggers
+     * @param e The event the mouse triggers.
      * 
      */
     public void mouseExited( MouseEvent e ) { }
 
     /**
-     * This method makes sure the mouse does nothing when the mouse is pressed down.
+     * This makes the mouse do nothing when pressed down.
      * 
-     * @param e   the event the mouse triggers
+     * @param e The event the mouse triggers.
      * 
      */
     public void mousePressed( MouseEvent e ) { }
 
     /**
-     * This method makes sure the mouse does nothing when the mouse button is released.
+     * This makes the mouse do nothing when the button is released.
      * 
-     * @param e   the event the mouse triggers
+     * @param e The event the mouse triggers.
      * 
      */
     public void mouseReleased( MouseEvent e ) { }
 
     /**
-     * This method makes sure the mouse does nothing when the mouse is moved.
+     * This makes the mouse do nothing when the mouse is moved.
      * 
-     * @param e   the event the mouse triggers
+     * @param e The event the mouse triggers.
      * 
      */
     public void mouseWheelMoved( MouseWheelEvent e ){ }
 
     /**
-     * When the mouse clicks the button above the letters, the user can enter the word in a dialog box.
+     * When the button above the letters, a dialog box appears.
      * Then the score is updated if the word entered is correct.
      * 
-     * @param e   the event the mouse triggers
+     * @param e The event the mouse triggers.
      * 
      */
     public void mouseClicked( MouseEvent e ) {
@@ -378,19 +378,21 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Main method to run program
+     * Main method to run program.
      *
-     * @param args command line arguments. If args = "0", reggor.txt is used, if args = "1", kandre.txt is used, and if
-     * args = "2", usatel.txt is used.
+     * @param args Command line args for txt file.
      */
     public static void main(String[] args) {
         String file = "";
+        //If args = "0", reggor.txt is used
         if(args[0].equals("0")){
             file = "reggor.txt";
         }
+        //If args = "1", kandre.txt is used
         else if(args[0].equals("1")){
             file = "kandre.txt";
         }
+        //If args = "2", usatel.txt is used
         else if(args[0].equals("2")){
             file = "usatel.txt";
         }
