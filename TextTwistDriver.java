@@ -10,20 +10,42 @@ import java.io.*;
  */
 public class TextTwistDriver
 {
+    /**
+     * String array that stores the letters for the puzzle
+     */
     public String[] letters;
+    /**
+     * String arraylist that stores the words for the puzzle
+     */
     public ArrayList<String> words;
+    /**
+     * Variable for faster access to arraylist size
+     */
     private int size1;
+    /**
+     * Boolean array that is used to track already found answers
+     */
     public boolean[] sols;
+    /**
+     * String that stores number of each length of word for puzzle
+     */
     public static String meta;
+    /**
+     * Ints that are obtained from metadata
+     * Hold how many of their respective number - length words
+     */
     private int three;
     private int four;
     private int five;
     private int six;
+    /**
+     * Variable that tracks the player's score
+     */
     public int score;
-    private int total; //temporary variable to keep track of words to be removed in final implementation
 
     /**
      * Constructor for objects of class TextTwistDriver
+     * Initializes needed variables for gameplay
      * 
      * @param fileName String of file to be read in
      */
@@ -59,7 +81,6 @@ public class TextTwistDriver
             }
             s.close();
             size1 = words.size();
-            total = size1;
             sols = new boolean[size1];
         }
         catch (FileNotFoundException e){
@@ -165,8 +186,9 @@ public class TextTwistDriver
     
     public int getScore() {return score;}
 
-    public int getTotal() { return total;}
-
+    /**
+     * Prints each letter in the letters arrayList
+     */
     public void printLetters() {
         for (int i = 0; i < 6; i++) {
             System.out.print(letters[i] + " "); 
@@ -174,6 +196,9 @@ public class TextTwistDriver
         System.out.println();
     }
 
+    /**
+     * Prints each word in words arrayList
+     */
     public void printWords() {
         for (int i = 0; i < words.size(); i++) {
             System.out.print(words.get(i) + " ");   
@@ -181,8 +206,9 @@ public class TextTwistDriver
     }
 
     /**
-     * prints the letters the user can choose from.
+     * Returns the letters the user can choose from.
      * 
+     * @return lett String of letters for user to select
      */
     public String returnLetters() {
         String lett = "";
@@ -193,23 +219,11 @@ public class TextTwistDriver
     }
 
     /**
-     * This returnst the meta data.
+     * This returns the meta data.
+     * 
+     * @return String Meta data for how many of each length word
      */
     public static String getMeta() {
         return meta;
-    }
-
-    // Main method used for general testing
-    public static void main (String args[]) {
-        TextTwistDriver test = new TextTwistDriver("usatel.txt");
-        System.out.println(getMeta());
-        Scanner s = new Scanner(System.in);
-        do {
-            if (test.checkInput((String)s.next()) == true) {
-                test.total--;
-                System.out.print("Word found! "+test.getTotal() +" words remaining"); 
-            }
-        }while (!test.winner());
-        System.out.println("You are a winner!");
     }
 }
