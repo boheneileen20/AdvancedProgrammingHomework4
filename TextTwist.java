@@ -5,9 +5,10 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.util.*;
 /**
- * TextTwist is a game requiring the user to find the words contained in a given word.
+ * TextTwist is a game requiring the user to find the words 
+ * contained in a given word.
  *
- * @author Eileen Bohen 
+ * @author Eileen Bohen and Josh Rosenthal
  * @version Spring 2019
  */
 public class TextTwist extends JPanel implements MouseListener {
@@ -132,19 +133,23 @@ public class TextTwist extends JPanel implements MouseListener {
         for (int i = 0; i < threeLetter; i++) {
             for (int j = 0; j < 3; j++) {
                 if(i>=MAX3){
-                    g.fillRect(startX + (j * space) + OFFSET + 10, startY + ((i-MAX3) * space), WIDTH, WIDTH);
+                    g.fillRect(startX + (j * space) + OFFSET + 10,
+                    startY + ((i-MAX3) * space), WIDTH, WIDTH);
                     if (tTD.sols[count]) {
                         g.setColor(Color.BLACK);
                     }
-                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + OFFSET + 12, startY + ((i-MAX3) * space) + 11);
+                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)),
+                    startX + (j * space) + OFFSET + 12, startY + ((i-MAX3) * space) + 11);
                     g.setColor(Color.YELLOW);
                 }
                 else{
-                    g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+                    g.fillRect(startX + (j * space), startY + (i * space),
+                    WIDTH, WIDTH);
                     if (tTD.sols[count]) {
                         g.setColor(Color.BLACK);
                     }
-                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
+                    g.drawString(Character.toString(tTD.words.get(count).charAt(j)),
+                    startX + (j * space) + 2, startY + (i * space) + 11);
                     g.setColor(Color.YELLOW);
                 }
             }
@@ -157,11 +162,13 @@ public class TextTwist extends JPanel implements MouseListener {
         //produces boxes for 4 letter words
         for (int i = 0; i < fourLetter; i++) {
             for (int j = 0; j < 4; j++) {
-                g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+                g.fillRect(startX + (j * space), startY + (i * space),
+                WIDTH, WIDTH);
                 if (tTD.sols[count]) {
                     g.setColor(Color.BLACK);
                 }
-                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
+                g.drawString(Character.toString(tTD.words.get(count).charAt(j)),
+                startX + (j * space) + 2, startY + (i * space) + 11);
                 g.setColor(Color.YELLOW);
             }
             count++;
@@ -170,11 +177,13 @@ public class TextTwist extends JPanel implements MouseListener {
         //produces boxes for 5 letter words
         for (int i = 0; i < fiveLetter; i++) {
             for (int j = 0; j < 5; j++) {
-                g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+                g.fillRect(startX + (j * space), startY + (i * space), 
+                WIDTH, WIDTH);
                 if (tTD.sols[count]) {
                     g.setColor(Color.BLACK);
                 }
-                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
+                g.drawString(Character.toString(tTD.words.get(count).charAt(j)),
+                startX + (j * space) + 2, startY + (i * space) + 11);
                 g.setColor(Color.YELLOW);
             }
             count++;
@@ -183,11 +192,13 @@ public class TextTwist extends JPanel implements MouseListener {
         //produces boxes for 6 letter words
         for (int i = 0; i < sixLetter; i++) {
             for (int j = 0; j < 6; j++) {
-                g.fillRect(startX + (j * space), startY + (i * space), WIDTH, WIDTH);
+                g.fillRect(startX + (j * space), startY + (i * space),
+                WIDTH, WIDTH);
                 if (tTD.sols[count]) {
                     g.setColor(Color.BLACK);
                 }
-                g.drawString(Character.toString(tTD.words.get(count).charAt(j)), startX + (j * space) + 2, startY + (i * space) + 11);
+                g.drawString(Character.toString(tTD.words.get(count).charAt(j)),
+                startX + (j * space) + 2, startY + (i * space) + 11);
                 g.setColor(Color.YELLOW);
             }
             count++;
@@ -218,13 +229,14 @@ public class TextTwist extends JPanel implements MouseListener {
 
             g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
             for(int i = 0; i<textLetters.size(); i++){
-                g.drawString(textLetters.get(i).toUpperCase(), textStartx + textSpace*i, textStarty);
+                g.drawString(textLetters.get(i).toUpperCase(), 
+                textStartx + textSpace*i, textStarty);
             }
         }
 
         clearText = false;
 
-        //if the user has selected last word, write the previous word to the scree
+        //if the user has selected last word, show previous word
         if(showPreviousWord){
             ArrayList<String> previousLetters = new ArrayList<>();
             for(int i = 0; i<previousWord.length(); i++){
@@ -237,7 +249,8 @@ public class TextTwist extends JPanel implements MouseListener {
 
             g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
             for(int i = 0; i<previousLetters.size(); i++){
-                g.drawString(previousLetters.get(i).toUpperCase(), textStartx + textSpace*i, textStarty);
+                g.drawString(previousLetters.get(i).toUpperCase(),
+                textStartx + textSpace*i, textStarty);
             }
         }
 
@@ -378,9 +391,10 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Main method to run program
+     * Main method to run program, please use "0", "1", or "2" to
+     * select which text document to use
      *
-     * @param args Determines text deocument used.
+     * @param args Determines text document used.
      */
     public static void main(String[] args) {
         String file = "";
@@ -394,7 +408,9 @@ public class TextTwist extends JPanel implements MouseListener {
             file = "usatel.txt";
         }
         else{
-            System.out.println("To play the game, you must provide an input argument. Enter 0,1, or 2.");
+            String err = "To play the game, you must provide an input ";
+            err += "argument. Enter 0,1, or 2.";
+            System.out.println(err);
         }
 
         tTD = new TextTwistDriver(file);
