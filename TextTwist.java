@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.util.*;
 /**
- * TextTwist is a game the user to find the words contained in a word.
+ * TextTwist is a game requiring the user to find the words contained in a given word.
  *
  * @author Eileen Bohen 
  * @version Spring 2019
@@ -66,7 +66,7 @@ public class TextTwist extends JPanel implements MouseListener {
     /**
      * PaintComponent method for JPanel.
      *
-     * @param g The Graphics object for this applet.
+     * @param  g The graphics object for this applet
      */
     @Override
     public void paintComponent(Graphics g)
@@ -262,7 +262,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * This randomizes the letters the user can choose from.
+     * This randomizes the letters that the user can choose from.
      * 
      */
     public void randomizeLetters() {
@@ -271,7 +271,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Clears the users guess from the screen.
+     * Clears the users guess from the screen
      * 
      */
     public void clearLetters() {
@@ -281,7 +281,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Clears the users guess from the screen.
+     * Clears the users guess from the screen
      * 
      */
     public void showPrevious() {
@@ -291,7 +291,7 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Creates the window and GUI.
+     * Creates the window and GUI
      *
      */
     public static void createAndShowGUI(){
@@ -309,15 +309,15 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * This makes the mouse do nothing entering the panel.
+     * This makes the mouse do nothing when entering the panel.
      * 
-     * @param e The event the mouse triggers.
+     * @param e The event the mouse triggers
      * 
      */
     public void mouseEntered( MouseEvent e ) { }
 
     /**
-     * This makes the mouse do nothing exiting the panel.
+     * This makes the mouse donothing when leaving the panel.
      * 
      * @param e The event the mouse triggers.
      * 
@@ -333,15 +333,15 @@ public class TextTwist extends JPanel implements MouseListener {
     public void mousePressed( MouseEvent e ) { }
 
     /**
-     * This makes the mouse do nothing when the button is released.
+     * This makes nothing happen when the button is released.
      * 
-     * @param e The event the mouse triggers.
+     * @param e   the event the mouse triggers.
      * 
      */
     public void mouseReleased( MouseEvent e ) { }
 
     /**
-     * This makes the mouse do nothing when the mouse is moved.
+     * This makes the mouse do nothing when moved.
      * 
      * @param e The event the mouse triggers.
      * 
@@ -349,10 +349,10 @@ public class TextTwist extends JPanel implements MouseListener {
     public void mouseWheelMoved( MouseWheelEvent e ){ }
 
     /**
-     * When the button above the letters, a dialog box appears.
-     * Then the score is updated if the word entered is correct.
      * 
-     * @param e The event the mouse triggers.
+     * The user can type the word after clicking a button above the letters.
+     * 
+     * @param e The event the mouse triggers
      * 
      */
     public void mouseClicked( MouseEvent e ) {
@@ -378,21 +378,18 @@ public class TextTwist extends JPanel implements MouseListener {
     }
 
     /**
-     * Main method to run program.
+     * Main method to run program
      *
-     * @param args Command line args for txt file.
+     * @param args Determines text deocument used.
      */
     public static void main(String[] args) {
         String file = "";
-        //If args = "0", reggor.txt is used
         if(args[0].equals("0")){
             file = "reggor.txt";
         }
-        //If args = "1", kandre.txt is used
         else if(args[0].equals("1")){
             file = "kandre.txt";
         }
-        //If args = "2", usatel.txt is used
         else if(args[0].equals("2")){
             file = "usatel.txt";
         }
